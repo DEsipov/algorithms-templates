@@ -34,17 +34,15 @@
 # lst = [0, 1, 4, 9, 0]
 # res = [0, 1, 2, 1, 0]
 
-from python.tools import timer
-
-lst = [0, 1, 4, 9, 0]
-expected_res = [0, 1, 2, 1, 0]
+# from python.tools import timer
+from typing import List, Tuple
 
 
-@timer
+# @timer
 def zeronear(lst):
     n = len(lst)
-    res = [0] * 5
-    res2 = [0] * 5
+    res = []
+    res2 = []
     for i in range(n):
         pos = 0
         pos2 = 0
@@ -65,8 +63,19 @@ def zeronear(lst):
                 break
 
     res2.reverse()
-    result = map(min, zip(res, res2))
-    print(list(result))
+    return map(min, zip(res, res2))
 
 
-zeronear(lst)
+def read_input() -> Tuple[List[int], List[int]]:
+    n = int(input())
+    return list(map(int, input().strip().split()))
+
+
+# 0 1 4 9 0
+# expected_res = [0, 1, 2, 1, 0]
+# lst = [0, 1, 4, 9, 0]
+
+lst = read_input()
+
+result = zeronear(lst)
+print(" ".join(map(str, result)))
