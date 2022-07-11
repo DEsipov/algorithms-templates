@@ -33,37 +33,36 @@
 # n = 5
 # lst = [0, 1, 4, 9, 0]
 # res = [0, 1, 2, 1, 0]
-
-# from python.tools import timer
+import unittest
 from typing import List, Tuple
+from unittest import TestCase
 
 
-# @timer
 def zeronear(lst):
     n = len(lst)
-    res = []
-    res2 = []
-    for i in range(n):
-        pos = 0
-        pos2 = 0
-        fl2 = True
-
-        for j in range(i, n):
-            if fl2:
-                if lst[n - j - 1] != 0:
-                    pos2 += 1
-                else:
-                    res2.append(pos2)
-                    fl2 = False
-
-            if lst[j] != 0:
-                pos += 1
-            else:
-                res.append(pos)
+    forward = [0] * n
+    backward = [0] * n
+    for i in range(0, n):
+        # forward
+        j = i
+        while lst[j] != 0:
+            forward[i] += 1
+            j += 1
+            if j == n:
+                forward[i] = n
                 break
 
-    res2.reverse()
-    return map(min, zip(res, res2))
+        # backward
+        j = n - 1 - i
+        while lst[j] != 0:
+            backward[i] += 1
+            j -= 1
+            if j < 0:
+                backward[i] = n
+                break
+
+    backward.reverse()
+    return list(map(min, zip(forward, backward)))
 
 
 def read_input() -> Tuple[List[int], List[int]]:
@@ -71,11 +70,36 @@ def read_input() -> Tuple[List[int], List[int]]:
     return list(map(int, input().strip().split()))
 
 
-# 0 1 4 9 0
-# expected_res = [0, 1, 2, 1, 0]
-# lst = [0, 1, 4, 9, 0]
-
 lst = read_input()
 
 result = zeronear(lst)
 print(" ".join(map(str, result)))
+
+
+class ZeroTestCase(TestCase):
+
+    def test_smoke_1(self):
+        input_data = [0, 1, 4, 9, 0]
+        expected_data = [0, 1, 2, 1, 0]
+
+        res = zeronear(input_data)
+
+        self.assertEqual(expected_data, res)
+
+    def test_smoke_2(self):
+        input_data = [0, 7, 9, 4, 8, 20]
+        # 0 7 9 4 8 20
+        expected_data = [0, 1, 2, 3, 4, 5]
+
+        res = zeronear(input_data)
+
+        self.assertEqual(expected_data, res)
+
+
+# if __name__ == '__main__':
+#     ts = ZeroTestCase()
+#     ts.test_smoke_1()
+#     ts.test_smoke_2()
+
+
+
