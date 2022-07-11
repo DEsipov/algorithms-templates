@@ -43,8 +43,8 @@ expected_res = [0, 1, 2, 1, 0]
 @timer
 def zeronear(lst):
     n = len(lst)
-    res = []
-    res2 = []
+    res = [0] * 5
+    res2 = [0] * 5
     for i in range(n):
         pos = 0
         pos2 = 0
@@ -70,12 +70,3 @@ def zeronear(lst):
 
 
 zeronear(lst)
-
-
-
-
-
-
-
-
-
