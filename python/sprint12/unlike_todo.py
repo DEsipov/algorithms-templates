@@ -31,6 +31,17 @@ class Node:
         self.next_item = next_item
 
 
+if __name__ == '__main__':
+    ...
+
+    # Создать список из входящиз данных.
+    # Получить индекс элемента для удаления.
+    # Написать функцию для удаления элемента.
+    # Вывести на экран результирующий список.
+
+
+
+
 def print_list(node):
     while node is not None:
         print(node.value)
