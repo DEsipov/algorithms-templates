@@ -56,11 +56,13 @@ def local_create_matrix():
 
 def print_transpon_matrix(mtx, n, m):
     for i in range(m):
+        # Во внешнем цикле обнуляем именно список, а не строку.
         row = []
         for j in range(n):
             row.append(mtx[j][i])
 
-        line = ' '.join(map(str, row))
+        # Выводим строку. Посмотри про метод join у строки.
+        line = ' '.join(row)
         print(line)
 
 

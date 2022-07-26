@@ -54,6 +54,14 @@ def zas(node):
         node = node.next_item
 
 
+def zas(node):
+    if node.value is not None:
+        print(node.value)
+        while node.next_item is not None:
+            node = node.next_item
+            print(node.value)
+
+
 def create_list():
     count = int(input())
 
