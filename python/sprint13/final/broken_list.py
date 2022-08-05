@@ -51,13 +51,3 @@ def broken_search(nums, target) -> int:
             else:
                 right = mid - 1
     return -1
-
-
-if __name__ == '__main__':
-    n = input()
-    k = input()
-    line = input().split()
-
-    res = broken_search(line, k)
-
-    print(res)
