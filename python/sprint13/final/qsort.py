@@ -23,6 +23,7 @@ def sorting(arr, left, right):
     if right <= left:
         return
 
+    # Запоминаем начальные границы.
     left_idx = left
     right_idx = right
 
