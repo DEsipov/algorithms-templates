@@ -103,8 +103,8 @@ def get_local_results():
 
 if __name__ == '__main__':
     # Для отправки в контест.
-    results = get_results()
+    # results = get_results()
     # Для отладки локальной.
-    # results = get_local_results()
+    results = get_local_results()
     sorting(results, 0, len(results) - 1)
     print(*results, sep='\n')

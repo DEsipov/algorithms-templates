@@ -15,23 +15,23 @@ class User:
     def __repr__(self):
         return self.name
 
-
 def sorting(arr, left, right):
     # Если края схлопнулись выходим.
+    # FIX: тут нужен код.
     if right <= left:
         return
 
+    # Запоминаем начальные границы.
     left_idx = left
     right_idx = right
 
     # Выбираем опорный элемент посередине.
-    pivot_idx = (left + right) // 2
+    pivot_idx = (left+right) // 2
     pivot = arr[pivot_idx]
 
     # И пока левй указатель не дойдет не дойдет до правого.
     while left_idx <= right_idx:
 
-        # Двигаем левый указатель вперед, пока его значение меньше опорного.
         while pivot > arr[left_idx]:
             left_idx += 1
 
@@ -41,20 +41,30 @@ def sorting(arr, left, right):
 
         # Меняем местами правый и левый элемент.
         # И сдвигаем еще левый указатель вперед, правый назад.
-        # Если указатели ее не схлопнулись.
+        # Если указатели ее не схлопнулись, само собой.
+
+        # FIXME: т.е если левый указатель меньше правого, то возвращаем массив.
+        # Это неверно.
+        # Если  левый указатель меньше правого,
+        # То меняем местами правый и левый элемент.
         if left_idx <= right_idx:
+        #     return arr
+        # else:
             arr[left_idx], arr[right_idx] = arr[right_idx], arr[left_idx]
-            left_idx += 1
             right_idx -= 1
+            left_idx += 1
 
+    # FIXME:
     # Вызываем рекурсию для части от начала списка до правого указателя.
-    sorting(arr, left, right_idx)
-    # Вызываем рекурсию для части от левого указателя до конца списка.
-    sorting(arr, left_idx, right)
+    sorting(arr, ...)
+    # FIXME: Вызываем рекурсию для части от левого указателя до конца списка.
+    sorting(arr, ...)
 
-
-# FIX - метод, который данные из input получает, для отправки в контекст.
 def get_results():
+    """
+    метод, который данные из input получает, для отправки в контекст.
+    :return:
+    """
     count_line = int(input())
 
     results = []
@@ -91,13 +101,12 @@ def get_local_results():
         # иначе сортировка будет работать, но не так, как ожидается.
         user = User(name=name, score=-int(points), penalty=int(penalty))
         results.append(user)
-
     return results
-
 
 if __name__ == '__main__':
     # Для отправки в контест.
-    results = get_results()
+    # results = get_results()
+    results = get_local_results()
     # Для отладки локальной.
     # results = get_local_results()
     sorting(results, 0, len(results) - 1)
