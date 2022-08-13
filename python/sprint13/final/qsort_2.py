@@ -18,7 +18,7 @@ class User:
 
 def sorting(arr, left, right):
     # Если края схлопнулись выходим.
-    if left <= right:
+    if right <= left:
         return
 
     # Запоминаем начальные границы.
