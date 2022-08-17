@@ -1,18 +1,14 @@
 def broken_search(nums, target):
     left, right = 0, len(nums) - 1
+
     while left <= right:
         mid = (left + right) // 2
 
+        # Сравнение
         if nums[mid] == target:
             return mid
 
-        is_left_ord = bool(nums[left] <= nums[mid])
-        is_right_ord = not is_left_ord
-        left_inside = bool(nums[left] <= target < nums[mid])
-        right_inside = bool(nums[mid] < target <= nums[right])
-
-        if ((is_left_ord and left_inside)
-                or (is_right_ord and not right_inside)):
+        if ...:
             right = mid - 1
         else:
             left = mid + 1
