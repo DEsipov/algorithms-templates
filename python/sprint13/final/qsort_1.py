@@ -7,18 +7,26 @@ class User:
     def __gt__(self, other):
         return (self.score, self.penalty, self.name) > (
             other.score, other.penalty, other.name)
-        # if (
-        #     self.score > other.score
-        #     or (self.score == other.score and self.penalty < other.penalty)
-        #     or (self.score == other.score
-        #         and self.penalty == other.penalty
-        #         and self.name < other.name)
-        # ):
-        #     return True
-        # return False
 
     def __repr__(self):
         return self.name
+
+
+
+
+# Внешняя, которую вызовешь в main.
+def sorting(results, start, end):
+
+    # Внутренняя.Объявление.
+    def sorting_inner(left, right):
+        # Причем внутри можно эта функция будет видеть
+        # переменные внешней функции. Например.
+        results.append()
+
+    # Вызов внутренней функции.
+    sorting_inner(start, end)
+
+
 
 
 def sorting(results, start, end):
