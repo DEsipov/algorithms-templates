@@ -1,49 +1,41 @@
+import sys
+import threading
 
-# контест ожидает функцию broken_search, а не main_search, переименуй.
-def broken_search(array, target):
-    def _binary_search(left, right):
-        """ Бинарный поиск элемента в массиве."""
-        if right <= left:
-            return -1
-        mid = (left + right) // 2
-        if array[mid] == target:
-            return mid
-        if target < array[mid]:
-            return _binary_search(left, mid)
+sys.setrecursionlimit(10**7)
+threading.stack_size(2**27)
+
+
+def binarySearch(arr, x, left, right):
+    if right <= left:
+        return -1
+    mid = (left + right) // 2
+    if arr[mid] == x:
+        return mid
+    elif x < arr[mid]:
+        return binarySearch(arr, x, left, mid)
+    else:
+        return binarySearch(arr, x, mid + 1, right)
+
+
+def broken_search(nums, target, left=0, right=1) -> int:
+    if right == len(nums):
+        break_value = -1
+    else:
+        if nums[right] < nums[left]:
+            break_value = left
         else:
-            return _binary_search(mid + 1, right)
-
-    def _break_search(left, right):
-        """ Поиск индекса разрыва."""
-        if right <= left:
-            return right
-        mid = (left + right) // 2
-        if array[mid] < array[mid - 1]:
-            return mid
-        if array[mid] < array[left]:
-            return _break_search(left, mid)
-        if array[mid] > array[left]:
-            return _break_search(mid, right)
-        return _break_search(left, mid)
-
-    def broken_search():
-        """Поиск в сломанном массиве."""
-        left = 0
-        right = len(array)
-        if len(array) == 1:
-            if array[0] == target:
-                return 0
-            return -1
-        if array[0] < array[-1]:
-            return _binary_search(left, right)
-        broken_index = _break_search(left, right)
-        left_part = _binary_search(left, broken_index)
-        right_part = _binary_search(broken_index, right)
-        if left_part == right_part == -1:
-            return -1
-        if left_part != -1:
-            return left_part
+            return broken_search(nums, target, left+1, right+1)
+    if break_value == -1:
+        return binarySearch(nums, target, 0, len(nums))
+    else:
+        if nums[break_value+1] <= target <= nums[-1]:
+            return binarySearch(nums, target, break_value+1, len(nums))
         else:
-            return right_part
+            return binarySearch(nums, target, 0, break_value+1)
 
-    return broken_search()
+
+if __name__ == '__main__':
+    target = 5
+    expected = 6
+    arr = [19, 21, 100, 101, 1, 4, 5, 7, 12]
+    print(arr.index(target), expected)

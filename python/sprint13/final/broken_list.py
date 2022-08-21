@@ -66,3 +66,10 @@ def broken_search(nums, target) -> int:
             else:
                 right = mid - 1
     return -1
+
+
+if __name__ == '__main__':
+    target = 5
+    expected = 6
+    arr = [19, 21, 100, 101, 1, 4, 5, 7, 12]
+    print(arr.index(target), expected)
